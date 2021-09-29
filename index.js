@@ -19,6 +19,4 @@ import { ExcelExporter } from "./exporter"
 
 // import ExcelJs from "exceljs"; exceljs 버전문제로 dist 파일 참조. exporter.js 주석 참고
 
-export const ExcelImporter;
-export const ExcelExporter;
 
