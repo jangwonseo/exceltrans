@@ -196,10 +196,10 @@ end-of-stream@^1.4.1:
   dependencies:
     once "^1.4.0"
 
-exceljs@4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/exceljs/-/exceljs-4.2.1.tgz#49d74babfcae74f61bcfc8e9964f0feca084d91b"
-  integrity sha512-EogoTdXH1X1PxqD9sV8caYd1RIfXN3PVlCV+mA/87CgdO2h4X5xAEbr7CaiP8tffz7L4aBFwsdMbjfMXi29NjA==
+exceljs@4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/exceljs/-/exceljs-4.3.0.tgz#939bc0d4c59c200acadb7051be34d25c109853c4"
+  integrity sha512-hTAeo5b5TPvf8Z02I2sKIT4kSfCnOO2bCxYX8ABqODCdAjppI3gI9VYiGCQQYVcBaBSKlFDMKlAQRqC+kV9O8w==
   dependencies:
     archiver "^5.0.0"
     dayjs "^1.8.34"
@@ -210,6 +210,13 @@ exceljs@4.2.1:
     tmp "^0.2.0"
     unzipper "^0.10.11"
     uuid "^8.3.0"
+
+exceltrans@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/exceltrans/-/exceltrans-2.0.0.tgz#45e92784997bef28210ca7ecaff2ee69c5893db2"
+  integrity sha512-kEbflpJSweTMHlUglIBtxEX+odLXs9700x6OKfNiwx5X69odJiXKLHFSpYiJK1VEnsf7Lboy+grWfuaVgr8IQw==
+  dependencies:
+    exceljs "4.3.0"
 
 exit-on-epipe@~1.0.1:
   version "1.0.1"

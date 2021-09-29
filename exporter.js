@@ -1,56 +1,12 @@
-
 /**
-아래는 exceljs에서 issue로 나온 IE11 사용시 에러에 대한 해결방법 코드인데 IPCMS에서는 해결안됨
-(exceljs 임포트 전에 반드시 먼저 선언할 것.)
-
-const rewritePattern = require('regexpu-core');
-const {generateRegexpuOptions} = require('@babel/helper-create-regexp-features-plugin/lib/util');
-
-const {RegExp} = window;
-try {
-  new RegExp('a', 'u');
-} catch (err) {
-    window.RegExp = function(pattern, flags) {
-    if (flags && flags.includes('u')) {
-      return new RegExp(rewritePattern(pattern, flags, generateRegexpuOptions({flags, pattern})));
-    }
-    return new RegExp(pattern, flags);
-  };
-  window.RegExp.prototype = RegExp;
-}
-import ExcelJs from "exceljs/dist/exceljs";
-
-
-****** 문제 및 해결 상태 : 
-1. IPCMS에 적용된 exceljs는 4.1.1 버전이었음
-2. 4.1.1 버전에서 IE11 일경우 구문에러(syntax Error) 발생
-3. vue-project에서 2.0.1 버전일경우 IE11에서도 에러는 발생하지않지만,
-   IPCMS 에서는 2.0.1 버전으로 Downgrade해도 IE11에서 에러 발생.
-4. 하지만, 2.0.1 버전에서 exceljs 의 dist 파일을 임포트 하면 IE11에서 에러발생하지않음
-5. 현재 2.0.1 버전으로 Downgrade 해놓고 dist파일을 임포트하여 임시로 동작하게 함
-6. 추측 : IE11에서 스크립트소스 참조시, ES6->ES5 트랜스파일링하는 시점이 맞지않아, 구문에러발생
-
-* vue-project에서 2.0.1 버전일경우, IE11에서 왜 에러가 발생하지않는지?
-  (하지만 vue-project 에서도 4.1.1 버전으로 변경시, IE11에서 에러발생함.
-   그리고 4.1.1 버전에서는 excel-js에서 참조하는 dependency 라이브러리중 트랜스파일링이 제대로 이루어지지않는 문제발생.
-   그래서 vue-project 를 4.1.1 버전으로 upgrade 할수는 없는 상황.)
-
-* IPCMS에서 4.1.1 버전을 사용하면서 exceljs 의 dist 파일을 임포트해도 에러발생함
-  즉, 4.1.1 버전에서는 dependency 라이브러리가 변경되었고, 변경된 하위의 dependency 라이브러리에서 es6가 트랜스파일링이
-  안된다고 추측중
-
-*/
-
- /**
  * json 데이터로 엑셀파일 생성
  * 
  *  엑셀 스타일을 지정하고, 엑셀 데이터를 채우는 동작을 수행
- *  사용법은 listGpoaByAttorney.js 참고
  * 
  * created by jangwon.seo
  */
-// import ExcelJs from "exceljs"; // 원래 정상 작동코드이지만 현재 임시로 dist 파일을 import 하도록 변경
-import ExcelJs from "exceljs/dist/exceljs";
+
+import ExcelJs from "exceljs";
 
 export const ExcelExporter = {
 
