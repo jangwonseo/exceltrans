@@ -1,6 +1,6 @@
 {
   "name": "exceltrans",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Import / Export Excel using exceljs",
   "main": "index.js",
   "scripts": {
