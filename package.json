@@ -18,5 +18,6 @@
   "homepage": "https://github.com/jangwonseo/exceltrans#readme",
   "dependencies": {
     "exceljs": "4.3.0"
-  }
+  },
+  "type": "module"
 }

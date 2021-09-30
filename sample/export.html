@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+    <meta charset="UTF-8">
+    <body>
+        <h2>Excel Export</h2>
+        <div>
+            <div id="btnExport"></div>
+            <div id="showJson"></div>
+        </div>
+    </body>
+</html>
+
+<script type="module">
+// import { ExcelExporter } from "../../common/js/excel/importer";
+// import FileSaver from "file-saver";
+
+// 엑셀 출력(export)
+const writeFile = (fileName) => {
+
+    /******** JSON 생성 ********/
+    // 빈 JSON 객체 생성 (엑셀시트에 사용될 JSON데이터 구조)
+    let worksheetJson = {
+        sheetName: "Sheet1",
+        sheetStyle: {},
+        rowList: []
+    };
+
+    // worksheetJson 데이터 세팅
+    const jsonData = {
+        theadColList: [
+            { value: "name" },
+            { value: "age" },
+            { value: "phone" },
+            { value: "address" },
+            { value: "gender" }
+        ],
+        tbodyRowList: [
+            [ 
+                { value: "John" }, { value: "23" }, { value: "111-1111-1111" }, { value: "11 st." }, { value: "man" },
+                { value: "Merry" }, { value: "32" }, { value: "222-2222-2222" }, { value: "12 st." }, { value: "woman" }
+            ]
+        ]
+    }
+
+    worksheetJson.rowList.push(jsonData.theadColList);         // first Row
+    jsonData.tbodyRowList.forEach(function(row) {              // except for first Row
+        worksheetJson.rowList.push(row);
+    });
+
+    // STYLE 설정
+    const styleObj = { 
+        theme: "custom",    // 'default', 'table' 설정시 thead등 추가설정 필요없음.
+        thead: {
+            width: [
+                {address: "A", width: "10"},
+                {address: "B", width: "5"},
+                {address: "C", width: "10"},
+                {address: "D", width: "25"},
+                {address: "E", width: "10"},
+            ],
+            border: {
+                top: { style: "thin" },
+                left: { style: "thin" },
+                right: { style: "thin" },
+                bottom: { style: "double" }
+            },
+            fill: {
+                type: "pattern",
+                pattern: "solid",
+                fgColor: { argb: "AADBFF" }
+            },
+            alignment: {
+                vertical: "middle",
+                horizontal: "center",
+                wrapText: true
+            },
+            font: {
+                size: 13,
+                bold: true,
+                family: 2
+            },
+        }
+        // mergeCellList: [] // 병합을 원하는 range 입력 ex) ['A4:B5', 'A9:B9']
+    }
+
+    worksheetJson.sheetStyle = styleObj;
+
+
+
+    /****** 엑셀 객체 생성 ********/
+    // 엑셀 Sheet 생성
+    ExcelExporter.init(worksheetJson.sheetName);
+
+    // 엑셀 Sheet 데이터 세팅
+    ExcelExporter.setData(worksheetJson);
+
+    // 엑셀 Sheet 스타일 세팅
+    ExcelExporter.setStyle(worksheetJson);
+
+    // 엑셀 이미지 세팅 - example
+    // ExcelExporter.setImage(worksheetJson);
+
+    /****** 엑셀 다운로드 ********/
+    ExcelExporter.workbook.xlsx.writeBuffer()
+    .then(function(buffer) {
+        FileSaver.saveAs(new Blob([buffer]), `${fileName}.xlsx`);
+    });
+}
+
+document.getElementById("btnExport").addEventListener("click", function() {
+    writeFile("sampleExcel");
+});
+
+
+</script>
+

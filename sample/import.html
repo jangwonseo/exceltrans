@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    <meta charset="UTF-8">
+    <body>
+        <h2>Excel Import</h2>
+        <input type="file" id="excelImport" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+        <div>
+            열 항목 : <div id="headerList"></div>
+            행 데이터 : <div id="rowList"></div>
+        </div>
+    </body>
+</html>
+
+<script type="module">
+// import { ExcelImporter } from "../../common/js/excel/importer";
+
+document.getElementById("excelImport").addEventListener("change", function(event) {
+
+    const file = event.target.files[0];
+
+    if (file.name.endsWith(".xlsx") === false) {
+        alert("엑셀(.xlsx) 파일만 업로드 가능합니다.");
+        if (event.target.files && event.target.files[0]) {
+        event.target.value = null;
+        }
+        return;
+    }
+
+    ExcelImporter.init(0, 4);           // 데이터 추출 시작점(기준점) 세팅
+    ExcelImporter.extractData(file)     // 데이터 추출
+    .then((result) => { 
+    
+        const headerList = result.headerList;
+        const bodyRowList = result.bodyRowList;
+
+        // 데이터 출력
+        console.log(headerList);
+        console.log(bodyRowList);
+        
+        $("#headerList").append(headerList.join(","));
+        $("#rowList").append(JSON.stringify(bodyRowList));
+    });
+});
+
+</script>

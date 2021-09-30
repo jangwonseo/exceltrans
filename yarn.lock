@@ -211,13 +211,6 @@ exceljs@4.3.0:
     unzipper "^0.10.11"
     uuid "^8.3.0"
 
-exceltrans@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/exceltrans/-/exceltrans-2.0.0.tgz#45e92784997bef28210ca7ecaff2ee69c5893db2"
-  integrity sha512-kEbflpJSweTMHlUglIBtxEX+odLXs9700x6OKfNiwx5X69odJiXKLHFSpYiJK1VEnsf7Lboy+grWfuaVgr8IQw==
-  dependencies:
-    exceljs "4.3.0"
-
 exit-on-epipe@~1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/exit-on-epipe/-/exit-on-epipe-1.0.1.tgz#0bdd92e87d5285d267daa8171d0eb06159689692"
